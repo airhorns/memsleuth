@@ -645,7 +645,7 @@ module Genghis
           else
             {
               'databases' => [{'name' => @db}],
-              'totalSize' => [@db].stats['fileSize']
+              'totalSize' => self[@db].stats['fileSize']
             }
           end
         end
