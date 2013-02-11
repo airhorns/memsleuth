@@ -46,16 +46,12 @@ module Genghis
         @database.collection_names
       end
 
-      private
 
       def info
-        @info ||= begin
-          name = @database.name
-          @database.connection['admin'].command({:listDatabases => true})['databases'].detect do |db|
-            db['name'] == name
-          end
-        end
+        @info ||= @database.stats
       end
+
+      private
 
       def system_collection?(coll)
         [

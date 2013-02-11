@@ -25,7 +25,15 @@ GEM
     bson_ext (1.8.2)
       bson (~> 1.8.2)
     coderay (1.0.8)
+    columnize (0.3.6)
     commonjs (0.2.6)
+    debugger (1.3.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.7)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.8)
     diff-lcs (1.1.3)
     echoe (4.6.3)
       allison (>= 2.0.3)
@@ -133,6 +141,7 @@ PLATFORMS
 DEPENDENCIES
   active_support
   bson_ext
+  debugger
   faraday
   genghisapp!
   guard

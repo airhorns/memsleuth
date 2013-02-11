@@ -38,7 +38,7 @@ module Genghis
       end
 
       def create_database(db_name)
-        raise Genghis::DatabaseAlreadyExists.new(self, db_name) if client.database_names.include? db_name
+        raise Genghis::DatabaseAlreadyExists.new(self, db_name) if database_names.include? db_name
         begin
           client[db_name]['__genghis_tmp_collection__'].drop
         rescue Mongo::InvalidNSName
@@ -52,7 +52,7 @@ module Genghis
       end
 
       def [](db_name)
-        raise Genghis::DatabaseNotFound.new(self, db_name) unless client.database_names.include? db_name
+        raise Genghis::DatabaseNotFound.new(self, db_name) unless database_names.include? db_name
         Database.new(client[db_name])
       end
 
@@ -89,6 +89,14 @@ module Genghis
 
       def to_json(*)
         as_json.to_json
+      end
+
+      def database_names
+        if @db.nil?
+          client.database_names
+        else
+          [@db]
+        end
       end
 
       private
@@ -144,7 +152,7 @@ module Genghis
           else
             {
               'databases' => [{'name' => @db}],
-              'totalSize' => self[@db].stats['fileSize']
+              'totalSize' => self[@db].info['fileSize']
             }
           end
         end
