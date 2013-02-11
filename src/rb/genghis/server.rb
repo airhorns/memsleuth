@@ -186,5 +186,9 @@ module Genghis
       servers[server][database][collection].delete_file document
       json :success => true
     end
+
+    post '/heap_dump' do
+      servers[]
+    end
   end
 end

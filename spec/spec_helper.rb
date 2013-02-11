@@ -5,7 +5,7 @@ require_relative '../genghis.rb'
 
 RSpec.configure do |config|
   def genghis_backends
-    [:php, :ruby]
+    [:ruby]
   end
 
   def find_available_port

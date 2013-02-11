@@ -119,7 +119,11 @@ module Genghis
     end
 
     def default_servers
-      @default_servers ||= init_servers((ENV['GENGHIS_SERVERS'] || '').split(';'), :default => true)
+      @default_servers ||= begin
+        server_list = (ENV['GENGHIS_SERVERS'] || '').split(';')
+        server_list << ENV['MONGOHQ_URL'] if ENV["MONGOHQ_URL"]
+        init_servers(server_list, :default => true)
+      end
     end
 
     def init_servers(dsn_list, opts={})
