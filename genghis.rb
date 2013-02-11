@@ -835,6 +835,8 @@ module Genghis
     set :json_encoder,      :to_json
     set :json_content_type, :json
 
+    set :port, ENV["PORT"] if ENV["PORT"]
+
     helpers Genghis::Helpers
 
     def self.version
