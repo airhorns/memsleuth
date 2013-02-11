@@ -42,6 +42,10 @@ module Genghis
         as_json.to_json
       end
 
+      def collection_names
+        @database.collection_names
+      end
+
       private
 
       def info

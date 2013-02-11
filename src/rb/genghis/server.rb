@@ -188,7 +188,16 @@ module Genghis
     end
 
     post '/heap_dump' do
-      servers[]
+      database = servers[servers.keys.first].databases.first
+      database.create_collection("heap_dumps") unless database.collection_names.include?("heap_dumps")
+      database.create_collection("objects") unless database.collection_names.include?("objects")
+
+      dump_document = database["heap_dumps"].insert({:created_at => Time.now.utc})
+
+      request_json['heap_dump'].each do |object|
+        database["objects"].insert object.merge(:dump_id => dump_document["_id"])
+      end
+      json :success => true
     end
   end
 end
